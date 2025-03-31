@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Preferences } from '@capacitor/preferences'
+import { Preferences } from '@capacitor/app'
 
 //interface para criar um "objeto"
 export interface Task {
@@ -20,12 +20,8 @@ export class TaksService {
     
   }
 
-  getTask () {
+  getTask ()
 
-  }
-
-  deletarTask() {
-    
-  }
+  deletarTask() 
 
 }
