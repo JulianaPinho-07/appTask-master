@@ -19,14 +19,9 @@ import {
 import { addIcons } from 'ionicons';
 
 //importar icone
-import {ellipseOutline, checkmarkCircle} from 'ionicons/icons'
+import {ellipseOutline, checkmarkCircle, eyeOff, eye, trash} from 'ionicons/icons'
 
-//interface para criar um "objeto"
-interface Task {
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import { Task } from '../service/taks.service'; 
 
 @Component({
   selector: 'app-home',
@@ -43,12 +38,17 @@ interface Task {
     IonButton,
     IonList,
     IonLabel,
-    IonIcon
+    IonIcon,
+    IonItem
   ],
 })
+
 export class HomePage {
+
   tasks: Task[] = [];
   newTask: string = '';
+
+  exibirConcluidos: boolean = true;
 
   addTask() {
     //trin tira os espaços em branco
@@ -72,9 +72,19 @@ export class HomePage {
     console.log(task)
   }
 
-
+  deletarTask(id: number) {
+    this.tasks = this.tasks.filter((task) => task.id !== id)
+  }
 
   constructor() {
-    addIcons({ellipseOutline, checkmarkCircle})
+    addIcons({ellipseOutline, checkmarkCircle, eyeOff, eye, trash})
+  }
+
+  mostrarOcultar() {
+    this.exibirConcluidos = !this.exibirConcluidos;
+  }
+
+  get filterTasks() {
+    return this.tasks.filter((task) => this.exibirConcluidos || !task.completed)
   }
 }
